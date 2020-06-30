@@ -1,4 +1,14 @@
 {% extends 'body.html' %}
+{% load static %}
+{% block head %}
+    <link rel="stylesheet" href="{% static 'lib/datatables-1.10.21/css/dataTables.bootstrap4.min.css' %}"/>
+    <link rel="stylesheet"
+          href="{% static 'lib/datatables-1.10.21/responsive-2.2.5/css/responsive.bootstrap4.min.css' %}"/>
+    <script src="{% static 'lib/datatables-1.10.21/js/jquery.dataTables.js' %}"></script>
+    <script src="{% static 'lib/datatables-1.10.21/js/dataTables.bootstrap4.min.js' %}"></script>
+    <script src="{% static 'lib/datatables-1.10.21/responsive-2.2.5/js/dataTables.responsive.min.js' %}"></script>
+    <script src="{% static 'lib/datatables-1.10.21/responsive-2.2.5/js/responsive.bootstrap4.min.js' %}"></script>
+{% endblock %}
 
 {% block content %}
     <div class="card card-default">
@@ -9,7 +19,7 @@
             </h3>
         </div>
         <div class="card-body">
-            <table class="table">
+            <table class="table" id="data">
                 <thead>
                 {% block columns %}
 
@@ -28,4 +38,18 @@
             </button>
         </div>
     </div>
+{% endblock %}
+
+{% block javascript %}
+    <script type="application/javascript">
+        $(function () {
+            $('#data').DataTable({
+                responsive: true,
+                autoWidth: false,
+                "language":{
+                url:'{% static 'lib/datatables-1.10.21/dict_datatable_categoria.txt' %}'
+                }
+            });
+        });
+    </script>
 {% endblock %}
